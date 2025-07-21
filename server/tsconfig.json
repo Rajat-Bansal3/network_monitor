@@ -1,0 +1,37 @@
+{
+	"compilerOptions": {
+		"target": "ES2024",
+		"module": "ES2022",
+		"moduleResolution": "Bundler",
+		"rootDir": "./src",
+		"outDir": "./dist",
+		"baseUrl": ".",
+
+		"allowJs": true,
+		"allowImportingTsExtensions": false,
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"isolatedModules": true,
+		"sourceMap": true,
+		"declaration": true,
+		"declarationMap": true,
+		"noEmitOnError": true,
+
+		"strict": true,
+		"noImplicitAny": true,
+		"noUncheckedIndexedAccess": true,
+		"noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"exactOptionalPropertyTypes": true,
+		"useUnknownInCatchVariables": true,
+
+		"lib": ["ES2024"],
+		"types": ["node"],
+
+		"verbatimModuleSyntax": true,
+		"forceConsistentCasingInFileNames": true
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "dist", "coverage"]
+}
