@@ -1,0 +1,164 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int      @id @default(autoincrement())
+  email       String   @unique
+  password    String
+  role        Role     @default(Viewer)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Subnet {
+  id        Int      @id @default(autoincrement())
+  cidr      String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  devices   Device[]
+}
+
+model Device {
+  id            Int               @id @default(autoincrement())
+  ipAddress     String            @unique
+  macAddress    String?
+  name          String?
+  type          DeviceType
+  status        DeviceStatus      @default(Unknown)
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  lastChecked   DateTime?
+  lastScannedAt DateTime?
+  subnetId      Int?
+  subnet        Subnet?           @relation(fields: [subnetId], references: [id])
+  neighbors     Json?
+  alerts        Alert[]
+  metrics       Metric[]
+  scanResults   ScanResult[]
+  topologies    Topology[]
+}
+
+model Scan {
+  id            String       @id @default(uuid())
+  targets       String
+  scanType      ScanType
+  status        ScanStatus
+  progress      Int          @default(0)
+  statusMessage String?
+  startedAt     DateTime?
+  completedAt   DateTime?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  results       ScanResult[]
+
+  @@map("scans")
+}
+
+model ScanResult {
+  id          Int          @id @default(autoincrement())
+  scan        Scan         @relation(fields: [scanId], references: [id])
+  scanId      String
+  device      Device?      @relation(fields: [deviceId], references: [id])
+  deviceId    Int?
+  ipAddress   String
+  hostname    String?
+  macAddress  String?
+  deviceType  DeviceType   @default(Unknown)
+  status      DeviceStatus @default(Unknown)
+  openPorts   Int[]
+  osGuess     String?
+  vendor      String?
+  createdAt   DateTime     @default(now())
+
+  @@map("scan_results")
+}
+
+
+model Topology {
+  id        Int      @id @default(autoincrement())
+  name      String
+  data      Json
+  createdAt DateTime @default(now())
+  devices   Device[]
+}
+
+model Alert {
+  id          Int      @id @default(autoincrement())
+  device      Device   @relation(fields: [deviceId], references: [id])
+  deviceId    Int
+  title       String
+  message     String
+  severity    AlertSeverity
+  status      AlertStatus @default(Active)
+  createdAt   DateTime @default(now())
+  resolvedAt  DateTime?
+}
+
+model Metric {
+  id        Int      @id @default(autoincrement())
+  device    Device   @relation(fields: [deviceId], references: [id])
+  deviceId  Int
+  type      String
+  value     Float
+  timestamp DateTime @default(now())
+}
+
+enum Role {
+  Admin
+  Operator
+  Viewer
+}
+
+enum DeviceType {
+  Router
+  Switch
+  Firewall
+  Server
+  Workstation
+  Camera
+  Unknown
+}
+
+enum DeviceStatus {
+  Online
+  Offline
+  Degraded
+  Unknown
+}
+
+enum AlertSeverity {
+  Info
+  Low
+  Medium
+  High
+  Critical
+}
+
+enum AlertStatus {
+  Active
+  Resolved
+  Suppressed
+}
+
+enum ScanStatus {
+  Pending
+  Running
+  Completed
+  Failed
+  Cancelled
+}
+
+enum ScanType {
+  Quick
+  Full
+  Port
+  OS
+  Vulnerability
+}

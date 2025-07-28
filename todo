@@ -1,0 +1,79 @@
+signUp - Create new user account with email verification
+
+signIn - Authenticate user with credentials (JWT generation)
+
+signOut - Invalidate user session
+
+resetPassword - Initiate password reset flow
+
+updatePassword - Change authenticated user's password
+
+verifyEmail - Confirm user's email address
+
+refreshSession - Renew expired access token
+
+updateUserRole - (Admin) Change user permissions
+
+createDevice - Add new network device to monitoring
+
+updateDevice - Modify device properties
+
+deleteDevice - Remove device from monitoring
+
+getDeviceStatus - Fetch current status of a device
+
+bulkUpdateDevices - Update multiple devices at once
+
+registerSwitch - Add new managed switch
+
+updateSwitchConfig - Modify switch configuration
+
+getSwitchPorts - Retrieve all ports for a switch
+
+updatePortStatus - Update port status/configuration
+
+fetchSwitchTopology - Get switch hierarchy/connections
+
+logMonitoringData - Store device metrics (CPU, memory, bandwidth)
+
+triggerDeviceScan - Initiate network discovery scan
+
+forceStatusCheck - Manually ping specific device
+
+getHistoricalMetrics - Fetch device performance history
+
+updateDeviceStatus - (Python integration) Update status from monitoring scripts
+
+createAlert - Generate new alert
+
+resolveAlert - Mark alert as resolved
+
+acknowledgeAlert - Confirm alert receipt
+
+getActiveAlerts - Fetch unresolved alerts
+
+configureAlertThresholds - Set alert trigger conditions
+
+discoverNetwork - Auto-detect devices on network
+
+mapNetworkTopology - Generate network connection diagram
+
+backupSwitchConfig - Store switch configuration
+
+restoreSwitchConfig - Apply saved configuration
+
+fetchArpTable - Retrieve ARP data from switches
+
+generateAvailabilityReport - Calculate uptime statistics
+
+exportNetworkInventory - Export devices to CSV
+
+getBandwidthUsage - Retrieve network utilization data
+
+generateAuditLog - Create access history report
+
+getAllUsers - (Admin) List all users
+
+deactivateUser - (Admin) Disable user account
+
+updateUserProfile - Modify user information

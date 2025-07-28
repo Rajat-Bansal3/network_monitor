@@ -1,0 +1,34 @@
+[
+  {
+    "ipAddress": "192.168.29.67",
+    "status": "online",
+    "macAddress": "",
+    "hostname": "bigDaddy69420",
+    "vendor": "",
+    "openPorts": [
+      80,
+      443,
+      5432
+    ],
+    "osGuess": "",
+    "deviceType": "Server"
+  },
+  {
+    "ipAddress": "192.168.29.1",
+    "status": "online",
+    "macAddress": "",
+    "hostname": "reliance.reliance",
+    "vendor": "",
+    "openPorts": [
+      53,
+      80,
+      443,
+      1900,
+      7443,
+      8080,
+      8443
+    ],
+    "osGuess": "",
+    "deviceType": "Server"
+  }
+]
